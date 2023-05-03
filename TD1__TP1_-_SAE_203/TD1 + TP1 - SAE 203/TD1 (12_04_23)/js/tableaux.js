@@ -1,15 +1,7 @@
 
-var indexCol = {"Année": "none", 
-"Durée" : "none",
-"Genres" : "asc",
-"Réalisateur" : "none",
-"Titre" : "none"
-};  // indice des colonnes 
-var orderCol = {"Année": 4,
-"Durée": 3,
-"Genres": 2,​
-"Réalisateur": 1,
-Titre: 0};  // ordre des colonnes
+var indexCol = { };  // indice des colonnes 
+
+var orderCol = { };  // ordre des colonnes
 
 // modification de l'ordre pour la colonne colintitu
 function updateOrder(colintitu){
@@ -24,8 +16,17 @@ function updateOrder(colintitu){
 
 // trier selon une colonne
 function trierCol(colintitu, table) {
-    
+  // Vérifier si la colonne est triable
+  if (indexCol[colintitu] == "none") {
+    return;
   }
+  // Mettre à jour l'ordre de tri
+  updateOrder(colintitu);
+  // Obtenir l'index de la colonne
+  var colIndex = orderCol[colintitu];
+  // Trier la table
+  sortTable(colIndex);
+}
 
 // Mise en place du tri pour le tableau fourni en argument
 function sortTable(n) {
