@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head> <!-- commun à toute les pages sauf title dépend de la page -->
-		<title>SAE203 - Affichage - Salles</title>
+		<title>SAE203 - Accueil</title>
 		<meta charset="utf-8">
-		<base href="../">
 		<meta name="author" content="L.Merino et V.Lefevre">
 		<meta name='copyright' content='L.Merino et V.Lefevre'>
 		<meta name="keywords" content="SAE203, Bases de données, Intégration Web, Développement Web, Hébergement">
@@ -13,15 +12,15 @@
 		<script type="text/javascript" src="js/sae203.js"></script>
 	</head>
 	<body>
-		<header> <!-- commun à toute les pages sauf les chemins -->
+		<header> <!-- commun à toute les pages -->
 			<nav>
 				<ul>
-					<li><a href="index.html">SAE 203</a></li>
-					<li><a href="" class="rubrique selected">Affichage</a>
+					<li><a class="selected" href="index.html">SAE 203</a></li>
+					<li><a href="" class="rubrique">Affichage</a>
 						<ul>
-							<li><a href="affichage/films.html">Films</a></li>
+							<li><a href="affichage/films.php">Films</a></li>
 							<li><a href="affichage/realis.html">Réalisateurs</a></li>
-							<li><a class="selected" href="affichage/salles.html">Salles</a></li>
+							<li><a href="affichage/salles.html">Salles</a></li>
 						</ul>
 					</li>
 					<li><a href="" class="rubrique">Insertion</a>
@@ -35,15 +34,18 @@
 			</nav>
 		</header>
 		<main>
-			<h1 class="visible">Affichage > Salles</h1>
+			<h1 class="visible">Accueil</h1> <!-- au moins pour le référencement, changer la classe en invisible si nécessaire -->
 			<section>
-				<p>À faire</p>
+				<p>Bienvenue, voici le site Web que j'ai réalisé pour la SAE203 - Concevoir un site Web avec une source de données.</p>
+				<p>Ajoutez des informations ...</p>
+				<div><img src="documents/monimage.jpg" alt="Mon Image" width="auto" height="120"></div> <!-- ajustez la taille -->
+				<p class="monom">Mon nom</p> <!-- votre nom sera ajouté automatiquement via le script JS à partir de la balise meta auteur -->
 			</section>
 		</main>
 		<footer> <!-- le même pour toutes les pages -->
 			<div id="listpages">
-				<a href="index.html">Accueil</a><br>
-				<span class='selected'>Affichage</span> > <a href="affichage/films.html">Films</a>, <a href="affichage/realis.html">Réalisateurs</a>, <a href="affichage/salles.html" class='selected'>Salles</a><br>
+				<a class='selected' href="index.html">Accueil</a><br>
+				<span>Affichage</span> > <a href="affichage/films.php">Films</a>, <a href="affichage/realis.html">Réalisateurs</a>, <a href="affichage/salles.html">Salles</a><br>
 				<span>Insertion</span> > <a href="insertion/films.html">Films</a>, <a href="insertion/salles.html">Salles</a>, <a href="insertion/proj.html">Projections</a>
 			</div>
 			<address>
