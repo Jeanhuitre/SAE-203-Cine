@@ -1,0 +1,64 @@
+/* Pour toutes les pages d'insertion, y compris la connextion */
+
+main > section > form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 0.8em;
+}
+
+main > section > form > label {
+  text-align: right;
+  align-self: center;
+}
+
+main > section > form > label[for='resume'] {
+  align-self: baseline;
+}
+
+main > section > form > fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  grid-column: 2;
+}
+
+#duree {
+  vertical-align: text-top;
+  margin-right: 0.25em;
+}
+
+#minutes {
+  margin: 0 0.25em;
+  width: 5em;
+}
+
+#reset {
+  margin-left: 0.8em;
+}
+
+/* animation bordure */
+@keyframes redtext {
+  0% { color: initial;  }
+  50% { color: red; }
+  100% { color: initial; }
+}
+
+.redtext {
+  animation: redtext 1.5s linear;
+}
+
+/* connextion */
+#login, #passwd {
+  max-width: 20em;
+}
+
+main > section > p:first-of-type {
+  margin-top: 0;
+  margin-bottom: 1.45em;
+}
+
+#erreur.visible {
+  color: red;
+  margin-top: 1.6em;
+}
+

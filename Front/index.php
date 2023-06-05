@@ -15,25 +15,28 @@
 		<header> <!-- commun à toute les pages -->
 			<nav>
 				<ul>
-					<li><a class="selected" href="index.html">SAE 203</a></li>
+					<li><a class="selected" href="index.php">SAE 203</a></li>
 					<li><a href="" class="rubrique">Affichage</a>
 						<ul>
 							<li><a href="affichage/films.php">Films</a></li>
-							<li><a href="affichage/realis.html">Réalisateurs</a></li>
-							<li><a href="affichage/salles.html">Salles</a></li>
+							<li><a href="affichage/realis.php">Réalisateurs</a></li>
+							<li><a href="affichage/salles.php">Salles</a></li>
+							<li><a href="affichage/horaires.php">Horaires</a></li>
+							<li><a href="affichage/genres.php">Genres</a></li>
 						</ul>
 					</li>
 					<li><a href="" class="rubrique">Insertion</a>
 						<ul>
-							<li><a href="insertion/films.html">Films</a></li>
-							<li><a href="insertion/salles.html">Salles</a></li>
-							<li><a href="insertion/proj.html">Projections</a></li>
+							<li><a href="insertion/films.php">Films</a></li>
+							<li><a href="insertion/salles.php">Salles</a></li>
+							<li><a href="insertion/proj.php">Projections</a></li>
 						</ul>
 					</li>
 				</ul>
 			</nav>
 		</header>
 		<main>
+
 			<h1 class="visible">Accueil</h1> <!-- au moins pour le référencement, changer la classe en invisible si nécessaire -->
 			<section>
 				<p>Bienvenue, voici le site Web que j'ai réalisé pour la SAE203 - Concevoir un site Web avec une source de données.</p>
@@ -44,9 +47,9 @@
 		</main>
 		<footer> <!-- le même pour toutes les pages -->
 			<div id="listpages">
-				<a class='selected' href="index.html">Accueil</a><br>
-				<span>Affichage</span> > <a href="affichage/films.php">Films</a>, <a href="affichage/realis.html">Réalisateurs</a>, <a href="affichage/salles.html">Salles</a><br>
-				<span>Insertion</span> > <a href="insertion/films.html">Films</a>, <a href="insertion/salles.html">Salles</a>, <a href="insertion/proj.html">Projections</a>
+				<a class='selected' href="index.php">Accueil</a><br>
+				<span>Affichage</span> > <a href="affichage/films.php">Films</a>, <a href="affichage/realis.php">Réalisateurs</a>, <a href="affichage/salles.php">Salles</a>, <a href="affichage/horaires.php">Horaires</a>, <a href="affichage/genres.php">Genres</a><br>
+				<span>Insertion</span> > <a href="insertion/films.php">Films</a>, <a href="insertion/salles.php">Salles</a>, <a href="insertion/proj.php">Projections</a>
 			</div>
 			<address>
 				<span>BUT MMI, 50000 Saint-Lô, France</span>

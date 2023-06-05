@@ -1,5 +1,5 @@
 <?php
-        $dsn="mysql:host=mysql.info.unicaen.fr;dbname=merino221_3";
+        $dsn="mysql:host=mysql.info.unicaen.fr;dbname=merino221_4";
         $user="merino221";
         $mdp="eequa4yaHei1ooph";
 

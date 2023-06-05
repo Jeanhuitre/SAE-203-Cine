@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head> <!-- commun à toute les pages sauf title dépend de la page -->
-		<title>SAE203 - Affichage - Films</title>
+		<title>SAE203 - Affichage - Réalisateurs</title>
 		<meta charset="utf-8">
 		<base href="../">
 		<meta name="author" content="L.Merino et V.Lefevre">
@@ -32,7 +32,6 @@
 			});
 
 		</script>
-
 	</head>
 	<body>
 		<header> <!-- commun à toute les pages sauf les chemins -->
@@ -41,8 +40,8 @@
 					<li><a href="index.php">SAE 203</a></li>
 					<li><a href="" class="rubrique selected">Affichage</a>
 						<ul>
-							<li><a class="selected" href="affichage/films.php">Films</a></li>
-							<li><a href="affichage/realis.php">Réalisateurs</a></li>
+							<li><a href="affichage/films.php">Films</a></li>
+							<li><a class="selected" href="affichage/realis.php">Réalisateurs</a></li>
 							<li><a href="affichage/salles.php">Salles</a></li>
 							<li><a href="affichage/horaires.php">Horaires</a></li>
 							<li><a href="affichage/genres.php">Genres</a></li>
@@ -59,7 +58,7 @@
 			</nav>
 		</header>
 		<main>
-			<h1 class="visible">Affichage > Films</h1>
+			<h1 class="visible">Affichage > Réalisateurs</h1>
 			<section class="tableau">
 				<form>
 					<input type="text" id="monInputRech" placeholder="Rechercher ..."><select id="monSelect"></select><button type="button" id="btnReset">Effacer</button>
@@ -68,17 +67,11 @@
 					<?php 
 						include ("../db/connexion.php");
 						try {
-							$sql="Select f.nom, concat (r.nom, ' ', r.prenom), f.genre, f.duree, p.date from FILM
-							f inner join REALISATEUR as r on f.idreal = r.idreal INNER JOIN 
-							PROJECTION as p on f.visa = p.visa GROUP BY f.visa";
+							$sql="Select concat(r.nom, ' ', r.prenom) from REALISATEUR as r Group by r.idreal";
 							$res = $dtb->prepare($sql);
     						$res->execute();
 							echo "<thead><tr>
-									<th>Titre</th>
-									<th>Realisateur</th>
-									<th>Genre</th>
-									<th>Durée</th>
-									<th>Séance prévue le</th>
+									<th>Liste des réalisateurs</th>
 									</tr></thead>
 									<tbody>
 									\n";
@@ -86,7 +79,7 @@
 								echo "<tr>";
 								foreach ($ligne as $elt)
 									echo "<td>".$elt."</td>";
-								echo "</tr>\n";
+								echo "<tr>\n";
 							}
 							echo "</tbody>";
 						} catch (PDOException $e) {
@@ -100,7 +93,7 @@
 		<footer> <!-- le même pour toutes les pages -->
 		<div id="listpages">
 				<a href="index.php">Accueil</a><br>
-				<span class='selected'>Affichage</span> > <a class='selected' href="affichage/films.php">Films</a>, <a href="affichage/realis.php">Réalisateurs</a>, <a href="affichage/salles.php">Salles</a>, <a href="affichage/horaires.php">Horaires</a>, <a href="affichage/genres.php">Genres</a><br>
+				<span class='selected'>Affichage</span> > <a href="affichage/films.php">Films</a>, <a href="affichage/realis.php" class='selected'>Réalisateurs</a>, <a href="affichage/salles.php">Salles</a>, <a href="affichage/horaires.php">Horaires</a>, <a href="affichage/genres.php">Genres</a><br>
 				<span>Insertion</span> > <a href="insertion/films.php">Films</a>, <a href="insertion/salles.php">Salles</a>, <a href="insertion/proj.php">Projections</a>
 			</div>
 			<address>

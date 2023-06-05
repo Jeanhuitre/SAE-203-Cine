@@ -1,27 +1,38 @@
-table {
-    border: 1px;
-    border-color: grey;
-    width: 100%;
-    height: 200px;
+main > section { overflow: auto; }
+
+main > section > form {
+  padding: 0 0 0.5em 0;
 }
 
-thead {
-    background-color: black;
-    text-align: center;
+main > section > table {
+  border: 1px solid #502F2F;
+  background-color: whitesmoke;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
 }
 
-thead td {
-    color: aliceblue;
+main > section > table > tbody > tr > td, main > section > table > thead > tr > th {
+  border: 1px solid #AAAAAA;
+  padding: 0.62em;
+  font-size: 0.75em;
 }
 
-tbody td {
-    text-align: center;
+main > section > table > thead > tr > th {
+ cursor: pointer; 
 }
 
-tbody tr:nth-child(2n) {
-    background-color: lightgray;
+main > section > table > tbody > tr:nth-child(even) > td {
+  background-color: rgba(255,250,240,0.9);
 }
 
-.tableau {
-    overflow-y: auto;
+main > section > table > thead > tr > th {
+  font-weight: bold;
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(25,5,28,0.6) 100%);
+  color: rgb(254,245,255);
+  border-left: 1px solid #F5C8C8;
+}
+
+table thead th:first-child {
+  border-left: none;
 }
