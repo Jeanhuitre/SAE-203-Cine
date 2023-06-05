@@ -9,7 +9,9 @@
 		<meta name='date' content='Apr. 27, 2022'>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="css/sae203.css">
+		<link rel="stylesheet" type="text/css" href="css/affiche-tab.css">
 		<script type="text/javascript" src="js/sae203.js"></script>
+		
 	</head>
 	<body>
 		<header> <!-- commun à toute les pages -->
@@ -39,8 +41,9 @@
 
 			<h1 class="visible">Accueil</h1> <!-- au moins pour le référencement, changer la classe en invisible si nécessaire -->
 			<section>
-				<p>Bienvenue, voici le site Web que j'ai réalisé pour la SAE203 - Concevoir un site Web avec une source de données.</p>
-				<p>Ajoutez des informations ...</p>
+				<div>
+					<p>Bienvenue, voici le site Web que j'ai réalisé pour la SAE203 - Concevoir un site Web avec une source de données.</p>
+				</div>
 				<div><img src="documents/monimage.jpg" alt="Mon Image" width="auto" height="120"></div> <!-- ajustez la taille -->
 				<p class="monom">Mon nom</p> <!-- votre nom sera ajouté automatiquement via le script JS à partir de la balise meta auteur -->
 			</section>

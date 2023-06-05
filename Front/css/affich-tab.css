@@ -36,3 +36,8 @@ main > section > table > thead > tr > th {
 table thead th:first-child {
   border-left: none;
 }
+
+section > div > .acc {
+  display: inline-block;
+  text-align: justify;
+}
