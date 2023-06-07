@@ -28,6 +28,8 @@ if (isset($GLOBALS['confirm'])) {
 		<link rel="stylesheet" type="text/css" href="css/sae203.css">
 		<link rel="stylesheet" type="text/css" href="css/insertion.css">
 		<script type="text/javascript" src="js/sae203.js"></script>
+		<script type="text/javascript" src="js/mod-suppr.js"></script>
+		
 	</head>
 
 	<body>
@@ -56,10 +58,13 @@ if (isset($GLOBALS['confirm'])) {
 		</header>
 		<main>
 			<h1 class="visible">Insertion > Films</h1>
+			
+			<h2>Formulaire d'insertion</h2>
+
 			<section>
 
 			<?php include('../db/connexion.php') ?>
-				
+
 				<form action='insertion/insert-film.php' method="post"> <!-- à générer en Php -->
 					<label for="nom">Nom</label><input type="text" pattern="[A-Za-z0-9\s'’]{1,100}" id="nom" name="nom" required>
 					<label for="visa">Visa</label><input type="text" pattern="[0-9]{1,10}" id="visa" name="visa" required>
@@ -100,8 +105,82 @@ if (isset($GLOBALS['confirm'])) {
 					<label for="resume">Résumé</label><textarea id="synopsis" name="synopsis" pattern="[A-Za-z0-9\s',.!?]{1,1500}" class="entities" required></textarea>
 					<fieldset><input type="submit" id="submit" value="Insérer le film"><input type="reset" value="Effacer" id="reset"></fieldset>
 				</form>
-				<?php echo $confirmationMessage; ?>
+				<?php echo "</br>".$confirmationMessage; ?>
+
 			</section>
+
+			<br><br>
+
+			<button onclick="toggleDeleteFormMod()">Afficher le formulaire de modification</button>
+			<button onclick="toggleDeleteFormSuppr()">Afficher le formulaire de suppression</button>
+
+			<section id="delete-form-section-mod" style="display: none;"> <!--Formulaire de modification de film-->
+    		<h2 id="delete-title">Modifier un film</h2>
+			
+			<form id="delete-form" class="hidden" action="modify-film.php" method="POST">
+				<label for="movie-id">Nom du film :</label>
+				<select name="selectFilm" id="selectFilm">
+					<?php
+						try {
+							$sql = "SELECT f.visa, f.nom from FILM f Group by f.visa";
+							$stmt=$dtb->prepare($sql);
+							$stmt->execute();
+
+							while ($ligne = $stmt->fetchAll(PDO::FETCH_OBJ)) {
+								foreach ($ligne as $value) {
+									if ($value->nom == $selectFilm) {
+										echo "<option selected='selected' value='".$value->visa."'>".$value->nom."</option>";
+									} else {
+										echo "<option value='".$value->visa."'>".$value->nom."</option>";
+									}
+								}
+							}
+						} catch (PDOException $e) {
+							echo "Erreur :".$e -> getMessage()."<br/>";
+							exit(0);	
+						}
+					?>
+				
+				<input type="submit" value="modifier">
+				<button type="button" onclick="cancelDeleteFormMod()">Annuler</button>
+			</form>
+			</section>
+			
+			<section id="delete-form-section-suppr" style="display: none;"> <!--Formulaire de suppression de film-->
+    		<h2 id="delete-title">Supprimer un film</h2>
+			
+			<form id="delete-form" class="hidden" action="insertion/delete-film.php" method="POST">
+				<label for="movie-id">ID du film à supprimer :</label>
+				<select name="selectFilm" id="selectFilm">
+					<?php
+					if ($a == false) {
+						echo "<option value='defaut' disabled='disabled' selected='selected'>Sélectionnez un film</option>";
+					} elseif ($a == true) {echo "<option value='defaut' disabled='disabled'>Sélectionnez un film</option>";}
+						try {
+							$sql = "SELECT f.visa, f.nom from FILM f Group by f.visa";
+							$stmt=$dtb->prepare($sql);
+							$stmt->execute();
+
+							while ($ligne = $stmt->fetchAll(PDO::FETCH_OBJ)) {
+								foreach ($ligne as $value) {
+									if ($value->nom == $selectFilm) {
+										echo "<option selected='selected' value='".$value->visa."'>".$value->nom."</option>";
+									} else {
+										echo "<option value='".$value->visa."'>".$value->nom."</option>";
+									}
+								}
+							}
+						} catch (PDOException $e) {
+							echo "Erreur :".$e -> getMessage()."<br/>";
+							exit(0);	
+						}
+					?>
+				
+				<input type="submit" value="Supprimer">
+				<button type="button" onclick="cancelDeleteFormSuppr()">Annuler</button>
+			</form>
+			</section>
+
 		</main>
 		<footer> <!-- le même pour toutes les pages -->
 		<div id="listpages">

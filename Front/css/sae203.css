@@ -173,3 +173,7 @@ footer > #listpages > .selected {
 footer > #listpages > a.selected {
   text-decoration: underline;
 }
+
+.delete-form {
+  display: none;
+}
