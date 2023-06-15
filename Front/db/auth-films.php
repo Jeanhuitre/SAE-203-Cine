@@ -12,6 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="css/sae203.css">
 		<link rel="stylesheet" type="text/css" href="css/insertion.css">
 		<script type="text/javascript" src="js/sae203.js"></script>
+		<script type="text/javascript" src="js/pattern.js"></script>
 		<script type="text/javascript">
 			
 			// compléter avec le code local au fichier
@@ -38,7 +39,11 @@
 			login.addEventListener('input', cacherErreur);
 			passwd.addEventListener('input', cacherErreur);
 			});
-
+		</script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				document.getElementById('submit').addEventListener('click', verifAuth);
+			});
 		</script>
 	</head>
 	<body>
@@ -56,9 +61,9 @@
 				<p>Veuillez vous authentifier pour accéder au mode insertion.</p>
 				<!-- Formulaire d'authentification -->
 				<form action="db/verifLogin-films.php" method="POST">
-					<label for="login">Login</label><input type="text" pattern="[A-Za-z0-9]{4,40}" id="login" name="login" required>
-					<label for="passwd">Mot de passe</label><input type="password" pattern="[\w!@#$%^&*()-+=]{4,40}" id="passwd" name="mdp" required>
-					<fieldset><input type="submit" id="submit" value="Connexion"><input type="reset" value="Effacer" id="reset"></fieldset>
+					<label for="login">Login</label><input type="text" id="login" name="login" required>
+					<label for="passwd">Mot de passe</label><input type="password" id="passwd" name="mdp" required>
+					<fieldset><input type="submit" id="submit" name="submit" value="Connexion"><input type="reset" value="Effacer" id="reset"></fieldset>
 				</form>
 				<?php
 					if (isset($GLOBALS['msgErreurSaisie'])) {

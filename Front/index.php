@@ -9,7 +9,6 @@
 		<meta name='date' content='Apr. 27, 2022'>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="css/sae203.css">
-		<link rel="stylesheet" type="text/css" href="css/affiche-tab.css">
 		<script type="text/javascript" src="js/sae203.js"></script>
 		
 	</head>

@@ -28,7 +28,12 @@ if (isset($GLOBALS['confirm'])) {
 		<link rel="stylesheet" type="text/css" href="css/sae203.css">
 		<link rel="stylesheet" type="text/css" href="css/insertion.css">
 		<script type="text/javascript" src="js/sae203.js"></script>
-		<script type="text/javascript" src="js/date.js"></script>
+		<script type="text/javascript" src="js/pattern.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				document.getElementById('submitProj').addEventListener('click', verifyFormProj);
+			});
+		</script>
 	</head>
 	<body>
 		<header> <!-- commun à toute les pages sauf les chemins -->
@@ -62,7 +67,7 @@ if (isset($GLOBALS['confirm'])) {
 				
 				<form action='insertion/insert-proj.php' method="post"> <!-- à générer en Php -->
 					<label for="visa">Nom du film projeté</label> <!-- On demande de sélectionner le nom car la requête renverra le visa associé ! Plus intuitif donc -->
-					<select id="visa" name="visa" class="verif"> <!-- générer par ordre alphabétique -->
+					<select id="visa" name="visa" class="verif" required> <!-- générer par ordre alphabétique -->
 							<option value="" disabled="disabled" selected="selected">Sélectionnez un visa</option>
 							<?php
 							try {
@@ -81,7 +86,7 @@ if (isset($GLOBALS['confirm'])) {
 							?>
 					</select>
 					<label for="salle">Salle</label>
-					<select id="salle" name="salle" class="verif"> <!-- générer par ordre alphabétique -->
+					<select id="salle" name="salle" class="verif" required> <!-- générer par ordre alphabétique -->
 							<option value="" disabled="disabled" selected="selected">Sélectionnez une salle</option>
 							<?php
 							try {
@@ -99,10 +104,10 @@ if (isset($GLOBALS['confirm'])) {
 							?>
 					</select>
 					<label for="date">Date de projection</label><span>
-					<input type="text" pattern="\d{4}-\d{2}-\d{2}" name="date" id="date" required>
+					<input type="text" name="date" id="date">
 					</span>
-					<label for="minutes">Heure de début</label><span><input type="text" name="dureeDeb" pattern="([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]" id="dureeDeb" class="verif"></span>
-					<fieldset><input type="submit" id="submit" value="Insérer le film"><input type="reset" value="Effacer" id="reset"></fieldset>
+					<label for="minutes">Heure de début</label><span><input type="text" name="dureeDeb" id="dureeDeb" class="verif"></span>
+					<fieldset><input type="submit" id="submitProj" value="Insérer le film"><input type="reset" value="Effacer" id="reset"></fieldset>
 				</form>
 				<?php echo $confirmationMessage; ?>
 			</section>

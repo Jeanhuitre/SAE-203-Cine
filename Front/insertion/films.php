@@ -29,6 +29,16 @@ if (isset($GLOBALS['confirm'])) {
 		<link rel="stylesheet" type="text/css" href="css/insertion.css">
 		<script type="text/javascript" src="js/sae203.js"></script>
 		<script type="text/javascript" src="js/mod-suppr.js"></script>
+		<script type="text/javascript" src="js/pattern.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+			document.getElementById('inserSubmit').addEventListener('click', verifFormFilm);
+		});
+
+		document.addEventListener('DOMContentLoaded', function() {
+			document.getElementById('modifSubmit').addEventListener('click', verifFormModifFilm);
+		});
+		</script>
 		
 	</head>
 
@@ -66,9 +76,9 @@ if (isset($GLOBALS['confirm'])) {
 			<?php include('../db/connexion.php') ?>
 
 				<form action='insertion/insert-film.php' method="post"> <!-- à générer en Php -->
-					<label for="nom">Nom</label><input type="text" pattern="[A-Za-z0-9\s'’]{1,100}" id="nom" name="nom" required>
-					<label for="visa">Visa</label><input type="text" pattern="[0-9]{1,10}" id="visa" name="visa" required>
-					<label for="minutes">Durée</label><span><input type="text" pattern="([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]" name="duree" id="minutes" required> minutes</span>
+					<label for="nom">Nom</label><input type="text" id="nom" name="nom" required>
+					<label for="visa">Visa</label><input type="text" id="visa" name="visa" required>
+					<label for="minutes">Durée</label><span><input type="text" name="duree" id="minutes" required></span>
 					<label for="rea">Réalisateur</label>
 					<select id="rea" name="rea"> <!-- générer par ordre alphabétique -->
 						<option value="" disabled="disabled" selected="selected">Sélectionnez un réalisateur</option>
@@ -103,7 +113,7 @@ if (isset($GLOBALS['confirm'])) {
 						<option>Documentaire</option>
 					</select>
 					<label for="resume">Résumé</label><textarea id="synopsis" name="synopsis" pattern="[A-Za-z0-9\s',.!?]{1,1500}" class="entities" required></textarea>
-					<fieldset><input type="submit" id="submit" value="Insérer le film"><input type="reset" value="Effacer" id="reset"></fieldset>
+					<fieldset><input type="submit" id="inserSubmit" value="Insérer le film"><input type="reset" value="Effacer" id="reset"></fieldset>
 				</form>
 				<?php echo "</br>".$confirmationMessage; ?>
 
@@ -114,12 +124,13 @@ if (isset($GLOBALS['confirm'])) {
 			<button onclick="toggleDeleteFormMod()">Afficher le formulaire de modification</button>
 			<button onclick="toggleDeleteFormSuppr()">Afficher le formulaire de suppression</button>
 
-			<section id="delete-form-section-mod" style="display: none;"> <!--Formulaire de modification de film-->
-    		<h2 id="delete-title">Modifier un film</h2>
+			<section id="modify-section" style="display: none;"> <!--Formulaire de modification de film-->
+    		<h2 id="modify-title">Modifier un film</h2>
 			
-			<form id="delete-form" class="hidden" action="modify-film.php" method="POST">
-				<label for="movie-id">Nom du film :</label>
-				<select name="selectFilm" id="selectFilm">
+			<form id="modify-form" class="hidden" action="insertion/modify-film.php" method="POST">
+				<label for="movie-id">Film à modifier :</label>
+				<select name="selectFilm" id="modif_selectFilm" required>
+				<option value="" disabled="disabled" selected="selected">Sélectionnez un film à modifier</option>
 					<?php
 						try {
 							$sql = "SELECT f.visa, f.nom from FILM f Group by f.visa";
@@ -140,22 +151,56 @@ if (isset($GLOBALS['confirm'])) {
 							exit(0);	
 						}
 					?>
+
+					</select>
+					<label for="nom">Nouveau nom</label><input type="text" id="modif_nom" name="nom" required>
+					<label for="rea">Nouveau réalisateur</label>
+					<select id="modif_rea" name="rea" required> <!-- générer par ordre alphabétique -->
+						<option value="" disabled="disabled" selected="selected">Sélectionnez un réalisateur</option>
+						<?php
+						try {
+							$sql = "SELECT CONCAT(r.nom, ' ', r.prenom) AS rname, r.idreal FROM REALISATEUR AS r GROUP BY r.idreal";
+    						$res = $dtb->prepare($sql);
+    						$res->execute();
+							while ($ligne = $res->fetch(PDO::FETCH_ASSOC)) { 
+								echo "<option value='".$ligne["idreal"]."'>";
+								echo $ligne["rname"];
+								echo "</option>";
+							}
+						} catch (PDOException $e) {
+							echo "ERREUR : ".$e->getMessage()."<br>";
+							exit(0);
+						}
+						?>
+					</select>
+					</select>
+					<label for="genre">Nouveau genre</label>
+					<select id="modif_genre" name="genre" class="entities"> <!-- générer par ordre alphbétique -->
+						<option value="" disabled="disabled" selected="selected">Sélectionnez un genre</option>
+						<option>Action</option>
+						<option>Aventure</option>
+						<option>Cartoon</option>
+						<option>Fantastique</option>
+						<option>Horreur</option>
+						<option>Policier</option>
+						<option>Animation</option>
+						<option>Documentaire</option>
+					</select>
+					<label for="resume">Nouveau résumé</label><textarea id="modif_synopsis" name="synopsis" class="entities" required></textarea>
 				
-				<input type="submit" value="modifier">
+				<input type="submit" value="modifier" id="modifSubmit">
 				<button type="button" onclick="cancelDeleteFormMod()">Annuler</button>
 			</form>
 			</section>
 			
-			<section id="delete-form-section-suppr" style="display: none;"> <!--Formulaire de suppression de film-->
+			<section id="suppression-section" style="display: none;"> <!--Formulaire de suppression de film-->
     		<h2 id="delete-title">Supprimer un film</h2>
 			
 			<form id="delete-form" class="hidden" action="insertion/delete-film.php" method="POST">
 				<label for="movie-id">ID du film à supprimer :</label>
 				<select name="selectFilm" id="selectFilm">
+				<option value="" disabled="disabled" selected="selected">Sélectionnez un film à supprimer</option>
 					<?php
-					if ($a == false) {
-						echo "<option value='defaut' disabled='disabled' selected='selected'>Sélectionnez un film</option>";
-					} elseif ($a == true) {echo "<option value='defaut' disabled='disabled'>Sélectionnez un film</option>";}
 						try {
 							$sql = "SELECT f.visa, f.nom from FILM f Group by f.visa";
 							$stmt=$dtb->prepare($sql);
@@ -176,7 +221,7 @@ if (isset($GLOBALS['confirm'])) {
 						}
 					?>
 				
-				<input type="submit" value="Supprimer">
+				<input type="submit" id="submit" value="Supprimer" onclick="messageSuppr()">
 				<button type="button" onclick="cancelDeleteFormSuppr()">Annuler</button>
 			</form>
 			</section>

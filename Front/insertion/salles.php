@@ -28,6 +28,12 @@ if (isset($GLOBALS['confirm'])) {
 		<link rel="stylesheet" type="text/css" href="css/sae203.css">
 		<link rel="stylesheet" type="text/css" href="css/insertion.css">
 		<script type="text/javascript" src="js/sae203.js"></script>
+		<script type="text/javascript" src="js/pattern.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+			document.getElementById('submitSalle').addEventListener('click', verifFormSalle);
+		});
+		</script>
 	</head>
 	<body>
 		<header> <!-- commun à toute les pages sauf les chemins -->
@@ -60,9 +66,9 @@ if (isset($GLOBALS['confirm'])) {
 			<?php include('../db/connexion.php') ?>
 				
 				<form action='insertion/insert-salles.php' method="post"> <!-- à générer en Php -->
-					<label for="nusalle">Numéro de salle</label><span><input type="text" pattern="[0-9]{1,2}" name="nusalle" id="nusalle" required></span>
-					<label for="capacite">Capacité maximale</label><span><input type="text" pattern="[0-9]{1,3}" name="capacite" id="capacite" required></span>
-					<fieldset><input type="submit" id="submit" value="Création de la salle"><input type="reset" value="Effacer" id="reset"></fieldset>
+					<label for="nusalle">Numéro de salle</label><span><input type="text" name="nusalle" id="nusalle" required></span>
+					<label for="capacite">Capacité maximale</label><span><input type="text" name="capacite" id="capacite" required></span>
+					<fieldset><input type="submit" id="submitSalle" value="Création de la salle"><input type="reset" value="Effacer" id="reset"></fieldset>
 				</form>
 				<?php echo $confirmationMessage; ?>
 			</section>

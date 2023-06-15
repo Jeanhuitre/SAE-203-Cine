@@ -9,6 +9,12 @@
                 $res = $dtb->prepare($sql);
                 $res->bindParam(':visa', $visa);
                 $res->execute();
+
+                $sql = "DELETE FROM PROJECTION WHERE visa = $selectFilm";
+                $res = $dtb->prepare($sql);
+                $res->bindParam(':visa', $visa);
+                $res->execute();
+
                 
                 $GLOBALS['confirm'] = "Le film a été supprimé avec succès.";
             } catch (PDOException $e) {
